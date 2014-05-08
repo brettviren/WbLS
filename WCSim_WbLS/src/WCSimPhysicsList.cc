@@ -296,8 +296,10 @@ void WCSimPhysicsList::ConstructOp(){
   // theCherenkovProcess->SetMaxBetaChangePerStep(10.0);
   // theCherenkovProcess->SetTrackSecondariesFirst(true);
 
-  G4OpticalSurfaceModel themodel = unified;
-  theBoundaryProcess->SetModel(themodel);
+  // in geant4.9.6:
+  // error: ‘class G4OpBoundaryProcess’ has no member named ‘SetModel’
+  //G4OpticalSurfaceModel themodel = unified;
+  //theBoundaryProcess->SetModel(themodel);
 
   theParticleIterator->reset();
   while( (*theParticleIterator)() )
