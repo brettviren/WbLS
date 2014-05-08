@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------
 # Setup the project
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
-project(WCSim)
+project(WCSim_WbLS)
 
 #----------------------------------------------------------------------------
 # Find Geant4 package, activating all available UI and Vis drivers by default
@@ -50,8 +50,8 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
-add_executable(WCSim WCSim.cc ${sources} ${headers})
-target_link_libraries(WCSim ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
+add_executable(WCSim_WbLS WCSim_WbLS.cc ${sources} ${headers})
+target_link_libraries(WCSim_WbLS ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
@@ -61,7 +61,7 @@ target_link_libraries(WCSim ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
 set(WCSIM_SCRIPTS
   jobOptions2.mac
   jobOptions.mac
-  novis.mac
+  example_mac_scripts/novis.mac
   tuning_parameters.mac
   vis.mac
   )
@@ -83,6 +83,6 @@ endforeach()
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS WCSim DESTINATION bin)
+install(TARGETS WCSim_WbLS DESTINATION bin)
 
 
