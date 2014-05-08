@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+'''
+This wscript file is used by waf to build the requirements for WCSim.
+
+One time setup:
+
+ $ ./waf --version
+
+Configure (note this tries to download supporting worch distribution)
+
+ $ ./waf --prefix=/path/to/install --orch-config=g4root.cfg configure
+
+Build
+
+ $ ./waf
+
+Install into prefix:
+
+ $ ./waf install
+
+'''
+
+top = '.'
+out = 'tmp'
+
+import os
+import sys
+from waflib.Configure import urlopen
+
+# Download worch support distribution from GitHub if we don't already have it
+worch_version = 'master'
+worch_directory = 'worch-%s' % worch_version
+if not os.path.exists(worch_directory):
+    url = 'https://codeload.github.com/brettviren/worch/zip/' + worch_version
+    web = urlopen(url)
+    #assert web.getcode() == 22, 'failed to download %s' % url
+    zf = worch_version + '.zip'
+    open(zf,'wb').write(web.read())
+    import zipfile
+    zf = zipfile.ZipFile(zf)
+    zf.extractall()
+sys.path.insert(0,worch_directory)
+
+def options(opt):
+    opt.load('orchlib', tooldir=worch_directory)
+
+def configure(cfg):
+    cfg.load('orchlib', tooldir=worch_directory)
+
+def build(bld):
+    bld.load('orchlib', tooldir=worch_directory)

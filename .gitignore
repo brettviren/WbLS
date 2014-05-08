@@ -40,3 +40,9 @@ pdf/
 vis_files/
 data/
 
+.waf*
+.lock-waf*
+*.zip
+install
+wcsim-build
+worch-master

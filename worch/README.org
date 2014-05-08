@@ -1,0 +1,72 @@
+#+TITLE: Build WCSim with worch.
+
+This area helps you build WCSim software and its dependencies in an automated way with the [[http://github.com/brettviren/worch][worch]] tool.
+
+* Building the Prerequisites
+
+WCSim mostly needs ROOT and Geant4.  Python/IPython in conjunction with PyROOT are commonly desired for analysis and so are also included.  
+
+To automatically build the prerequisites follow these steps after cloning the WbLS repository:
+
+#+BEGIN_EXAMPLE
+$ cd WbLS/worch
+$ ./waf --version          # (1)
+                           # (2)
+$ ./waf --prefix=/path/to/install --orch-config=g4root.cfg configure
+$ ./waf                    # (3)
+$ ./waf install            # (4)
+#+END_EXAMPLE
+
+What they do:
+
+1) Trigger a one-time unpacking of waf
+2) Configure waf using the [[./g4root.cfg]] build configuration.  This will cause the worch distribution to be downloaded from GitHub if it does not yet exist.
+3) Do the actual build.  This can take on order of an hour depending on the speed of the computer hosting the build.
+4) Install the build into the given prefix.
+
+* Setting up environment to use the prerequisites
+
+The automated build includes support for [[http://modules.sf.net/][Environment Modules (EM)]].  It is used to configure the user environment to use the software just built.  You must first set up EM and then use EM to set up the rest.
+
+** Setting up Environment Modules
+
+To make use of EM one must first "source" a shell-specific script and tell EM where the software was installed.  Assuming the =prefix= used in the example above one does this like:
+
+#+BEGIN_EXAMPLE
+$ source /path/to/install/Modules/3.2.10/init/bash
+$ export MODULEPATH=/path/to/install/modules
+#+END_EXAMPLE
+
+You can now list the available packages with the command:
+
+#+BEGIN_EXAMPLE
+$ module avail
+/path/to/install/modules 
+cmake/2.8.12.2/modulefile
+geant/4.9.6.p03/modulefile
+ipython/2.0.0/modulefile
+python/2.7.6/modulefile
+root/5.34.18/modulefile
+xercesc/3.1.1/modulefile
+#+END_EXAMPLE
+
+** Setting up to build WCSim
+
+After the prerequisites are built and EM has been set up one needs to set up the build environment to access the prerequisites before building WCSim itself.  Do this with:
+
+#+BEGIN_EXAMPLE
+$ module load cmake geant root
+#+END_EXAMPLE
+
+* Building WCSim
+
+The shell set up as above can now build WCSim using =cmake=.
+
+#+BEGIN_EXAMPLE
+$ mkdir wcsim-build
+$ cd wcsim-build
+$ cmake -DCMAKE_INSTALL_PREFIX=/path/to/install/wcsim/HEAD \
+        /path/to/source/WbLS/WCSim_WbLS
+$ make
+#+END_EXAMPLE
+
