@@ -65,8 +65,13 @@ The shell set up as above can now build WCSim using =cmake=.
 #+BEGIN_EXAMPLE
 $ mkdir wcsim-build
 $ cd wcsim-build
-$ cmake -DCMAKE_INSTALL_PREFIX=/path/to/install/wcsim/HEAD \
+$ cmake -DCMAKE_INSTALL_PREFIX=/path/to/install/wcsim/devel \
         /path/to/source/WbLS/WCSim_WbLS
 $ make
+$ make install
 #+END_EXAMPLE
+
+* Running WCSim
+
+More to come.
 
