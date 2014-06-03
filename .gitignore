@@ -10,6 +10,7 @@
 *.so
 *.a
 *.exe
+*.d
 
 # generated files #
 ###################
@@ -17,12 +18,15 @@
 *.root
 *.gif
 *.png
+*.pdf
 .DS_Store*
 Thumbs.db
 .log_logon.txt
 .root_hist
 geofile.txt
-
+*.log
+lastfile.txt
+*.mac
 
 # tmp directories#
 ###################
@@ -33,6 +37,8 @@ objects/
 root_files/
 old/
 pdf/
+vis_files/
+data/
 
 *.pyc
 
@@ -40,3 +46,9 @@ pdf/
 *.tar.gz
 *.log
 log
+.waf*
+.lock-waf*
+*.zip
+install
+wcsim-build
+worch-master

@@ -1,4 +1,6 @@
 // Simple example of reading a generated Root file
+void sample_readfile(const char* rootfile = "../wcsim.root");
+void sample_readfile(const char* rootfile)
 {
   // Clear global scope
   gROOT->Reset();
@@ -33,11 +35,10 @@
   gStyle->SetCanvasBorderMode(0);
 
   // Load the library with class dictionary info
-  // (create with "gmake shared")
-  gSystem.Load("../libWCSimRoot.so");
+  gSystem.Load("libWCSimRoot.so");
 
   // Open the file
-  TFile file("../wcsim.root");
+  TFile file(rootfile);
   
   // Get the a pointer to the tree from the file
   TTree *tree = (TTree*)file->Get("wcsimT");
