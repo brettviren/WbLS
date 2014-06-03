@@ -50,8 +50,15 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
-add_executable(WCSim_WbLS WCSim_WbLS.cc ${sources} ${headers})
-target_link_libraries(WCSim_WbLS ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
+add_executable(wcsim-wbls WCSim_WbLS.cc ${sources} ${headers})
+target_link_libraries(wcsim-wbls ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
+
+#----------------------------------------------------------------------------
+# The library for the root dictionary for the output file.
+# Note: this currently relies on the dictionary to be manually created
+# and committed.
+add_library(WCSimRoot SHARED src/WCSimRootEvent.cc src/WCSimRootGeom.cc src/WCSimPmtInfo.cc src/WCSimRootDict.cc)
+
 
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
@@ -83,7 +90,8 @@ endforeach()
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS WCSim_WbLS DESTINATION bin)
+install(TARGETS wcsim-wbls RUNTIME DESTINATION bin)
+install(TARGETS WCSimRoot LIBRARY DESTINATION lib)
 
 
 FILE(GLOB macfiles "${CMAKE_CURRENT_SOURCE_DIR}/*.mac" "${CMAKE_CURRENT_SOURCE_DIR}/example_mac_scripts/*.mac")
