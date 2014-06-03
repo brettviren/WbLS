@@ -1,16 +1,20 @@
 // Simple example of reading a generated Root file
 
+// Assumes "wcsim.root" in current working directory or run like:
+// root -l 'testgeo.C("myfile.root")'
+
+void testgeo(const char* rootfile = "../wcsim.root");
+void testgeo(const char* rootfile)
 {
 
   // Clear global scope
   gROOT->Reset();
 
   // Load the library with class dictionary info
-  // (create with "gmake shared")
-  gSystem.Load("../libWCSimRoot.so");
+  gSystem.Load("libWCSimRoot.so");
 
-  // Open the file
-  TFile file("../wcsim.root");
+  // Open the file, replace if you've named it something else
+  TFile file(rootfile);
   
   // Get the a pointer to the tree from the file
   TTree *gtree = (TTree*)file->Get("wcsimGeoT");

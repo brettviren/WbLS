@@ -1,4 +1,4 @@
-void read_PMT(char *filename=NULL) {
+void read_PMT(char *filename="../wcsim.root") {
   /* A simple script to plot aspects of phototube hits 
    * This code is rather cavalier; I should be checking return values, etc.
    * First revision 6-24-10 David Webber
@@ -8,15 +8,12 @@ void read_PMT(char *filename=NULL) {
    */
 
   gROOT->Reset();
-  gSystem->Load("../libWCSimRoot.so");
+  gSystem->Load("libWCSimRoot.so");
   gStyle->SetOptStat(1);
 
   TFile *f;
-  if (filename==NULL){
-    f = new TFile("../wcsim.root");
-  }else{
-    f = new TFile(filename);
-  }
+  f = new TFile(filename);
+
   if (!f->IsOpen()){
     cout << "Error, could not open input file: " << filename << endl;
     return -1;
