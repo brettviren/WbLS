@@ -95,6 +95,6 @@ Some example ROOT/CINT scripts are provided.
 
 #+BEGIN_EXAMPLE
 $ cp /path/to/install/wcsim/devel/examples/cint/*.C .
-$ rootl -l testgeo.C
+$ root -l 'testgeo.C("wcsim.root")'
 #+END_EXAMPLE
 
