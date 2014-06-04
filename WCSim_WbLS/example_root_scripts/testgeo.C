@@ -11,13 +11,13 @@ void testgeo(const char* rootfile)
   gROOT->Reset();
 
   // Load the library with class dictionary info
-  gSystem.Load("libWCSimRoot.so");
+  gSystem->Load("libWCSimRoot.so");
 
   // Open the file, replace if you've named it something else
   TFile file(rootfile);
   
   // Get the a pointer to the tree from the file
-  TTree *gtree = (TTree*)file->Get("wcsimGeoT");
+  TTree *gtree = (TTree*)file.Get("wcsimGeoT");
   
   // Get the number of events
   int nevent = gtree->GetEntries();

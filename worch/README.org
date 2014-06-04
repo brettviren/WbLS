@@ -96,5 +96,15 @@ Some example ROOT/CINT scripts are provided.
 #+BEGIN_EXAMPLE
 $ cp /path/to/install/wcsim/devel/examples/cint/*.C .
 $ root -l 'testgeo.C("wcsim.root")'
+geo nevent 1
+Cyl radius 3113.729980
+Cyl length 7998.070312
+PMT radius 152.399994
+Offset x y z 0.000000 0.000000 0.000000
+Num PMTs 35410
+pmt 0 1 1
+position: 3113.486328 38.967506 -3686.055908
+orientation: -0.998747 -0.050044 0.000000
+...
 #+END_EXAMPLE
 
